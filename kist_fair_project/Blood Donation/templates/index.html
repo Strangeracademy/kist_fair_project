@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donation & AI Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">BloodConnect</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#ai-assistant">AI Assistant</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="hero-content">
+                <h1>Welcome to BloodConnect</h1>
+                <p>Your one-stop platform for blood donation and health insights.</p>
+                <a href="#services" class="btn">Explore Services</a>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <h2>About Us</h2>
+            <p>
+                BloodConnect is dedicated to improving lives by connecting blood donors with recipients 
+                and providing insightful health analysis through our AI-powered tools. Join us in making a difference.
+            </p>
+        </section>
+
+        <section id="services" class="section">
+            <h2>Our Services</h2>
+            <div class="service-cards">
+                <div class="card">
+                    <h3>Find Donors</h3>
+                    <p>Locate nearby blood donors quickly and efficiently.</p>
+                </div>
+                <div class="card">
+                    <h3>Health Tips</h3>
+                    <p>Personalized health and diet recommendations based on your blood group.</p>
+                </div>
+                <div class="card">
+                    <h3>Upload Reports</h3>
+                    <p>Analyze your blood test report and get insights instantly.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="ai-assistant" class="section">
+            <h2>AI Health Assistant</h2>
+            <p>Ask questions about your blood health or upload a blood report for analysis.</p>
+            <div class="ai-container">
+                <div class="ai-chat">
+                    <h3>Ask the AI</h3>
+                    <textarea id="ai-question" placeholder="Type your question..."></textarea>
+                    <button id="ai-send-btn">Send</button>
+                </div>
+                <div id="ai-response" class="ai-response"></div>
+            </div>
+
+            <div class="upload-section">
+                <h3>Upload Blood Test Report</h3>
+                <form id="upload-form" enctype="multipart/form-data">
+                    <input type="file" id="file-input" name="file" accept=".pdf, .jpg, .jpeg, .png">
+                    <button type="submit" id="upload-btn">Upload</button>
+                </form>
+                <div id="upload-results" class="results"></div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <h2>Contact Us</h2>
+            <p>We would love to hear from you! Reach out to us for queries or collaboration.</p>
+            <form id="contact-form">
+                <input type="text" id="name" placeholder="Your Name">
+                <input type="email" id="email" placeholder="Your Email">
+                <textarea id="message" placeholder="Your Message"></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 BloodConnect. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
+
+<style>
+    /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Body */
+body {
+    color: #333;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Header Section */
+header {
+    height: 100vh;
+    background: linear-gradient(to bottom, #ff4d4d, #ff9999);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.header-content h1 {
+    font-size: 3.5rem;
+    animation: fadeInDown 1.5s ease-in-out;
+}
+
+.header-content p {
+    font-size: 1.2rem;
+    margin: 20px 0;
+    animation: fadeInUp 1.5s ease-in-out;
+}
+
+.cta-button {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #ff3333;
+}
+
+/* About Section */
+#about {
+    padding: 50px 20px;
+    text-align: center;
+    background: #f9f9f9;
+}
+
+.about-img {
+    width: 80%;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    animation: zoomIn 1s ease;
+}
+
+/* AI Assistant Section */
+#ai-assistant {
+    padding: 50px 20px;
+    background: white;
+    text-align: center;
+}
+
+.assistant-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+#sendButton {
+    background-color: #ff3333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#sendButton:hover {
+    background-color: #333;
+}
+
+#responseOutput {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f4f4f4;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    display: none;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #333;
+    color: white;
+    font-size: 0.9rem;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const uploadForm = document.getElementById("upload-form");
+    const resultsDiv = document.getElementById("analysis-results");
+
+    uploadForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const fileInput = document.getElementById("file-input");
+
+        if (!fileInput.files[0]) {
+            alert("Please select a file!");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", fileInput.files[0]);
+
+        try {
+            const response = await fetch("/upload", {
+                method: "POST",
+                body: formData,
+            });
+            const data = await response.json();
+
+            if (data.error) {
+                resultsDiv.innerHTML = `<p class="error">${data.error}</p>`;
+            } else {
+                resultsDiv.innerHTML = `
+                    <h3>Analysis Results:</h3>
+                    <pre>${data.analysis}</pre>
+                `;
+            }
+        } catch (error) {
+            console.error("Error uploading file:", error);
+            resultsDiv.innerHTML = `<p class="error">Error uploading file. Please try again.</p>`;
+        }
+    });
+});
+
+// Scroll to About Section
+function scrollToSection() {
+    document.querySelector('#about').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Send AI Query
+function sendMessage() {
+    const userInput = document.getElementById('userInput').value;
+    const responseOutput = document.getElementById('responseOutput');
+
+    if (!userInput.trim()) {
+        alert('Please enter a question.');
+        return;
+    }
+
+    fetch('/ai-assistant', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userInput })
+    })
+        .then(response => response.json())
+        .then(data => {
+            responseOutput.textContent = data.response || 'No response from AI.';
+            responseOutput.style.display = 'block';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            responseOutput.textContent = 'Error contacting AI.';
+            responseOutput.style.display = 'block';
+        });
+}
+
+
+</script>
